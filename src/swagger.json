@@ -1,0 +1,483 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Mi API",
+        "description": "Descripción de mi API"
+        },
+    "servers": [
+    {
+    "url": "http://localhost:3000"
+    }
+    ],
+    "paths": {
+        "/casas": {
+            "get": {
+                "summary": "Obtener una lista de todas las casas",
+                "description": "Obtiene una lista de casas con sus respectivos datos",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "direccion": {
+                                                "type": "Interger"
+                                            },  
+                                            "consumo diario": {
+                                                "type": "Interger"
+                                            },
+                                            "objetos": {
+                                                "type" : "array"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "post" :{
+                    "summary": "agrega una casa",
+                    "description": "agrega una casa a la lista de todos las casas",
+                    "responses": {
+                        "200": {
+                            "description": "Operación exitosa",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "direccion": {
+                                                    "type": "Interger"
+                                                },  
+                                                "consumo diario": {
+                                                    "type": "Interger"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/casas/:direccion/mostrarConsumo": {
+                "get": {
+                    "summary": "Obtener el consumo",
+                    "description": "Obtiene el consumo diario de una casa determinada",
+                    "responses": {
+                        "200": {
+                            "description": "Operación exitosa",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "direccion": {
+                                                    "type": "Interger"
+                                                },  
+                                                "consumo diario": {
+                                                    "type": "Interger"
+                                                },
+                                                "objetos": {
+                                                    "type" : "array"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/casas/:direccion/editar consumo": {
+                "patch": {
+                    "summary": "actualiza el consumo",
+                    "description": "actualiza el consumo diario de una casa determinada",
+                    "responses": {
+                        "200": {
+                            "description": "Operación exitosa",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "direccion": {
+                                                    "type": "Interger"
+                                                },  
+                                                "consumo diario": {
+                                                    "type": "Interger"
+                                                },
+                                                "objetos": {
+                                                    "type" : "array"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/casas/:direccion/editar direccion": {
+                "patch": {
+                    "summary": "actualiza la direccion",
+                    "description": "actualiza la direccion de una casa determinada",
+                    "responses": {
+                        "200": {
+                            "description": "Operación exitosa",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "direccion": {
+                                                    "type": "Interger"
+                                                },  
+                                                "consumo diario": {
+                                                    "type": "Interger"
+                                                },
+                                                "objetos": {
+                                                    "type" : "array"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/casas/:direccion": {
+                "get": {
+                    "summary": "obtiene una casa",
+                    "description": "obtiene la casa mediante la direccion",
+                    "responses": {
+                        "200": {
+                            "description": "Operación exitosa",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "direccion": {
+                                                    "type": "Interger"
+                                                },  
+                                                "consumo diario": {
+                                                    "type": "Interger"
+                                                },
+                                                "objetos": {
+                                                    "type" : "array"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "delete" :{
+                    "summary": "borra una casa",
+                    "description": "borra una casa de la lista",
+                    "responses": {
+                        "200": {
+                            "description": "Operación exitosa",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "direccion": {
+                                                    "type": "Interger"
+                                                },  
+                                                "consumo diario": {
+                                                    "type": "Interger"
+                                                },
+                                                "objetos": {
+                                                    "type" : "array"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }, 
+                "put" :{
+                    "summary": "actualiza los datos de una casa",
+                    "description": "cambia los datos de una casa",
+                    "responses": {
+                        "200": {
+                            "description": "Operación exitosa",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "direccion": {
+                                                    "type": "Interger"
+                                                },  
+                                                "consumo diario": {
+                                                    "type": "Interger"
+                                                },
+                                                "objetos": {
+                                                    "type" : "array"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "patch" :{
+                    "summary": "actualiza los datos de la casa ",
+                    "description": "actualiza todos los datos de la casa",
+                    "responses": {
+                        "200": {
+                            "description": "Operación exitosa",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "direccion": {
+                                                    "type": "Interger"
+                                                },  
+                                                "consumo diario": {
+                                                    "type": "Interger"
+                                                },
+                                                "objetos": {
+                                                    "type" : "array"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }, 
+        "/objetos": {
+            "get": {
+                "summary": "Obtener una lista de todas los objetos",
+                "description": "Obtiene una lista de objetos con sus respectivos datos",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "nombre": {
+                                                "type": "string"
+                                            },  
+                                            "consumo": {
+                                                "type": "Interger"
+                                            },
+                                            "id": {
+                                                "type": "Interger"
+                                            }
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post" :{
+                "summary": "agrega un objeto",
+                "description": "agrega un objeto a la lista de todos los objetos",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "nombre": {
+                                                "type": "string"
+                                            },  
+                                            "consumo": {
+                                                "type": "Interger"
+                                            },
+                                            "id": {
+                                                "type": "Interger"
+                                            }
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/objetos/:id": {
+            "get": {
+                "summary": "Obtiene un objeto",
+                "description": "Obtiene un objeto de la lista de objetos ",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "nombre": {
+                                                "type": "string"
+                                            },  
+                                            "consumo": {
+                                                "type": "Interger"
+                                            },
+                                            "id": {
+                                                "type": "Interger"
+                                            }
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete" :{
+                "summary": "borra un objeto",
+                "description": "borra un objeto de la lista de objetos",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "nombre": {
+                                                "type": "string"
+                                            },  
+                                            "consumo": {
+                                                "type": "Interger"
+                                            },
+                                            "id": {
+                                                "type": "Interger"
+                                            }
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put" :{
+                "summary": "actualiza un objeto",
+                "description": "cambia los datos de un objeto",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "nombre": {
+                                                "type": "string"
+                                            },  
+                                            "consumo": {
+                                                "type": "Interger"
+                                            },
+                                            "id": {
+                                                "type": "Interger"
+                                            }
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch" :{
+                "summary": "actualiza los datos de un objeto",
+                "description": "cambia todos los datos de un objeto",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "nombre": {
+                                                "type": "string"
+                                            },  
+                                            "consumo": {
+                                                "type": "Interger"
+                                            },
+                                            "id": {
+                                                "type": "Interger"
+                                            }
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
