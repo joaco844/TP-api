@@ -1,10 +1,10 @@
 import { Objetos } from "./Objetos";
 export class Casa {
-    direccion: number;
+    direccion: Number;
     consumo_diario: Number;
     objetos:Array<Objetos> = new Array<Objetos>;
-     constructor(direccion: number, consumo: Number){
-         this.direccion =direccion;
+     constructor(direccion: Number, consumo: Number){
+         this.direccion = direccion;
          this.consumo_diario = consumo;
          this.objetos = new Array<Objetos>;
      }

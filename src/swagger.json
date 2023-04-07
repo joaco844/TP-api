@@ -7,12 +7,15 @@
         },
     "servers": [
     {
-    "url": "http://localhost:3000"
+    "url": "http://localhost:5000"
     }
     ],
     "paths": {
         "/casas": {
             "get": {
+                "tags": [
+                    "casa"
+                  ],
                 "summary": "Obtener una lista de todas las casas",
                 "description": "Obtiene una lista de casas con sus respectivos datos",
                 "responses": {
@@ -26,10 +29,10 @@
                                         "type": "object",
                                         "properties": {
                                             "direccion": {
-                                                "type": "Interger"
+                                                "type": "number"
                                             },  
                                             "consumo diario": {
-                                                "type": "Interger"
+                                                "type": "number"
                                             },
                                             "objetos": {
                                                 "type" : "array"
@@ -40,256 +43,595 @@
                             }
                         }
                     }
+                }
+            },
+            "post": {
+                "tags": [
+                  "casa"
+                ],
+                "summary": "Añade una nueva casa",
+                "description": "Ingresa una nueva casa a la lista.",
+                "requestBody": {
+                  "description": "Crea una casa",
+                  "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "direccion": {
+                                        "type": "number"
+                                    },  
+                                    "consumo diario": {
+                                        "type": "number"
+                                    },
+                                    "objetos": {
+                                        "type" : "array",
+                                         "objeto":{
+                                            "type" : "object",
+                                        "properties" :{
+                                            "nombre": {
+                                                "type": "string"
+                                            },  
+                                            "consumo": {
+                                                "type": "number"
+                                            },
+                                            "id": {
+                                                "type": "number"
+                                            }
+                                        }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                  },
+                  "required": true
                 },
-                "post" :{
-                    "summary": "agrega una casa",
-                    "description": "agrega una casa a la lista de todos las casas",
-                    "responses": {
-                        "200": {
-                            "description": "Operación exitosa",
-                            "content": {
-                                "application/json": {
-                                    "schema": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "direccion": {
-                                                    "type": "Interger"
-                                                },  
-                                                "consumo diario": {
-                                                    "type": "Interger"
-                                                }
+                "responses": {
+                  "200": {
+                    "description": "Caso creado exitosamente",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "direccion": {
+                                        "type": "number"
+                                    },  
+                                    "consumo diario": {
+                                        "type": "number"
+                                    },
+                                    "objetos": {
+                                        "type" : "object",
+                                        "properties" :{
+                                            "nombre": {
+                                                "type": "string"
+                                            },  
+                                            "consumo": {
+                                                "type": "number"
+                                            },
+                                            "id": {
+                                                "type": "number"
                                             }
                                         }
                                     }
                                 }
                             }
                         }
+                      }
                     }
+                  },
+                  "405": {
+                    "description": "No se ha podido crear la casa"
+                  }
                 }
+              }
+        }, 
+        "/casas/{direccion}": {
+            "get": {
+                "tags": [
+                    "casa"
+                  ],
+                "summary": "obtiene una casa",
+                "description": "obtiene la casa mediante la direccion",
+                "parameters": [
+                    {
+                        "name" : "direccion",
+                        "in" : "path",
+                        "schema" : {
+                            "type" : "number"
+                        }
+                    }
+                  ],
+                  "responses": {
+                    "200": {
+                      "description": "Caso creado exitosamente",
+                      "content": {
+                        "application/json": {
+                          "schema": {
+                              "type": "array",
+                              "items": {
+                                  "type": "object",
+                                  "properties": {
+                                      "direccion": {
+                                          "type": "number"
+                                      },  
+                                      "consumo diario": {
+                                          "type": "number"
+                                      },
+                                      "objetos": {
+                                          "type" : "object",
+                                          "properties" :{
+                                              "nombre": {
+                                                  "type": "string"
+                                              },  
+                                              "consumo": {
+                                                  "type": "number"
+                                              },
+                                              "id": {
+                                                  "type": "number"
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                        }
+                      }
+                    },
+                    "405": {
+                      "description": "No se ha podido crear la casa"
+                    }
+                  }
             },
-            "/casas/:direccion/mostrarConsumo": {
-                "get": {
-                    "summary": "Obtener el consumo",
-                    "description": "Obtiene el consumo diario de una casa determinada",
-                    "responses": {
-                        "200": {
-                            "description": "Operación exitosa",
-                            "content": {
-                                "application/json": {
-                                    "schema": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "direccion": {
-                                                    "type": "Interger"
-                                                },  
-                                                "consumo diario": {
-                                                    "type": "Interger"
-                                                },
-                                                "objetos": {
-                                                    "type" : "array"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+            "delete" :{
+                "tags": [
+                    "casa"
+                  ],
+                "summary": "borra una casa",
+                "description": "borra una casa de la lista",
+                "parameters": [
+                    {
+                        "name" : "direccion",
+                        "in" : "path",
+                        "schema" : {
+                            "type" : "number"
                         }
                     }
-                }
+                  ],
+                  "responses": {
+                    "200": {
+                      "description": "Caso creado exitosamente",
+                      "content": {
+                        "application/json": {
+                          "schema": {
+                              "type": "array",
+                              "items": {
+                                  "type": "object",
+                                  "properties": {
+                                      "direccion": {
+                                          "type": "number"
+                                      },  
+                                      "consumo diario": {
+                                          "type": "number"
+                                      },
+                                      "objetos": {
+                                          "type" : "object",
+                                          "properties" :{
+                                              "nombre": {
+                                                  "type": "string"
+                                              },  
+                                              "consumo": {
+                                                  "type": "number"
+                                              },
+                                              "id": {
+                                                  "type": "number"
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                        }
+                      }
+                    },
+                    "405": {
+                      "description": "No se ha podido crear la casa"
+                    }
+                  }
+            }, 
+            "put" :{
+                "tags": [
+                    "casa"
+                  ],
+                "summary": "actualiza los datos de una casa",
+                "description": "cambia los datos de una casa",
+                "parameters": [
+                    {
+                        "name" : "direccion",
+                        "in" : "path",
+                        "schema" : {
+                            "type" : "number"
+                        }
+                    }
+                  ],"requestBody": {
+                    "description": "modifica una casa",
+                    "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "array",
+                              "items": {
+                                  "type": "object",
+                                  "properties": {  
+                                      "consumo diario": {
+                                          "type": "number"
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                    },
+                    "required": true
+                  },
+                  "responses": {
+                    "200": {
+                      "description": "Caso creado exitosamente",
+                      "content": {
+                        "application/json": {
+                          "schema": {
+                              "type": "array",
+                              "items": {
+                                  "type": "object",
+                                  "properties": {
+                                      "direccion": {
+                                          "type": "number"
+                                      },  
+                                      "consumo diario": {
+                                          "type": "number"
+                                      },
+                                      "objetos": {
+                                          "type" : "object",
+                                          "properties" :{
+                                              "nombre": {
+                                                  "type": "string"
+                                              },  
+                                              "consumo": {
+                                                  "type": "number"
+                                              },
+                                              "id": {
+                                                  "type": "number"
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                        }
+                      }
+                    },
+                    "405": {
+                      "description": "No se ha podido crear la casa"
+                    }
+                  }
             },
-            "/casas/:direccion/editar consumo": {
-                "patch": {
-                    "summary": "actualiza el consumo",
-                    "description": "actualiza el consumo diario de una casa determinada",
-                    "responses": {
-                        "200": {
-                            "description": "Operación exitosa",
-                            "content": {
-                                "application/json": {
-                                    "schema": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "direccion": {
-                                                    "type": "Interger"
-                                                },  
-                                                "consumo diario": {
-                                                    "type": "Interger"
-                                                },
-                                                "objetos": {
-                                                    "type" : "array"
-                                                }
+            "patch" :{
+                "tags": [
+                    "casa"
+                  ],
+                "summary": "actualiza los datos de la casa ",
+                "description": "actualiza todos los datos de la casa",
+                "parameters": [
+                    {
+                        "name" : "direccion",
+                        "in" : "path",
+                        "schema" : {
+                            "type" : "number"
+                        }
+                    }
+                  ],
+                  "requestBody": {
+                    "description": "Crea una casa",
+                    "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "array",
+                              "items": {
+                                  "type": "object",
+                                  "properties": {
+                                      "direccion": {
+                                          "type": "number"
+                                      },  
+                                      "consumo diario": {
+                                          "type": "number"
+                                      },
+                                      "objetos": {
+                                          "type" : "object",
+                                          "objeto":{
+                                            "type" : "object",
+                                        "properties" :{
+                                            "nombre": {
+                                                "type": "string"
+                                            },  
+                                            "consumo": {
+                                                "type": "number"
+                                            },
+                                            "id": {
+                                                "type": "number"
+                                            }
+                                        }
+                                        }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                    },
+                    "required": true
+                  },
+                "responses": {
+                  "200": {
+                    "description": "Caso creado exitosamente",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "direccion": {
+                                        "type": "number"
+                                    },  
+                                    "consumo diario": {
+                                        "type": "number"
+                                    },
+                                    "objetos": {
+                                        "type" : "object",
+                                        "properties" :{
+                                            "nombre": {
+                                                "type": "string"
+                                            },  
+                                            "consumo": {
+                                                "type": "number"
+                                            },
+                                            "id": {
+                                                "type": "number"
                                             }
                                         }
                                     }
                                 }
                             }
                         }
+                      }
                     }
-                }
-            },
-            "/casas/:direccion/editar direccion": {
-                "patch": {
-                    "summary": "actualiza la direccion",
-                    "description": "actualiza la direccion de una casa determinada",
-                    "responses": {
-                        "200": {
-                            "description": "Operación exitosa",
-                            "content": {
-                                "application/json": {
-                                    "schema": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "direccion": {
-                                                    "type": "Interger"
-                                                },  
-                                                "consumo diario": {
-                                                    "type": "Interger"
-                                                },
-                                                "objetos": {
-                                                    "type" : "array"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "/casas/:direccion": {
-                "get": {
-                    "summary": "obtiene una casa",
-                    "description": "obtiene la casa mediante la direccion",
-                    "responses": {
-                        "200": {
-                            "description": "Operación exitosa",
-                            "content": {
-                                "application/json": {
-                                    "schema": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "direccion": {
-                                                    "type": "Interger"
-                                                },  
-                                                "consumo diario": {
-                                                    "type": "Interger"
-                                                },
-                                                "objetos": {
-                                                    "type" : "array"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "delete" :{
-                    "summary": "borra una casa",
-                    "description": "borra una casa de la lista",
-                    "responses": {
-                        "200": {
-                            "description": "Operación exitosa",
-                            "content": {
-                                "application/json": {
-                                    "schema": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "direccion": {
-                                                    "type": "Interger"
-                                                },  
-                                                "consumo diario": {
-                                                    "type": "Interger"
-                                                },
-                                                "objetos": {
-                                                    "type" : "array"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }, 
-                "put" :{
-                    "summary": "actualiza los datos de una casa",
-                    "description": "cambia los datos de una casa",
-                    "responses": {
-                        "200": {
-                            "description": "Operación exitosa",
-                            "content": {
-                                "application/json": {
-                                    "schema": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "direccion": {
-                                                    "type": "Interger"
-                                                },  
-                                                "consumo diario": {
-                                                    "type": "Interger"
-                                                },
-                                                "objetos": {
-                                                    "type" : "array"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "patch" :{
-                    "summary": "actualiza los datos de la casa ",
-                    "description": "actualiza todos los datos de la casa",
-                    "responses": {
-                        "200": {
-                            "description": "Operación exitosa",
-                            "content": {
-                                "application/json": {
-                                    "schema": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "direccion": {
-                                                    "type": "Interger"
-                                                },  
-                                                "consumo diario": {
-                                                    "type": "Interger"
-                                                },
-                                                "objetos": {
-                                                    "type" : "array"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                  },
+                  "405": {
+                    "description": "No se ha podido crear la casa"
+                  }
                 }
             }
-        }, 
+        },
+        "/casas/{direccion}/mostrarConsumo": {
+            "get": {
+                "tags": [
+                    "metodo personalisado"
+                  ],
+                "summary": "Obtener el consumo",
+                "description": "Obtiene el consumo diario de una casa determinada",
+                "parameters": [
+                    {
+                        "name" : "direccion",
+                        "in" : "path",
+                        "schema" : {
+                            "type" : "number"
+                        }
+                    }
+                  ],
+                  "responses": {
+                    "200": {
+                      "description": "consumo obtenido ",
+                      "content": {
+                        "application/json": {
+                          "schema": {
+                              "type": "array",
+                              "items": {
+                                  "type": "object",
+                                  "properties": {
+                                      "direccion": {
+                                          "type": "number"
+                                      },  
+                                      "consumo diario": {
+                                          "type": "number"
+                                      },
+                                      "objetos": {
+                                          "type" : "object",
+                                          "properties" :{
+                                              "nombre": {
+                                                  "type": "string"
+                                              },  
+                                              "consumo": {
+                                                  "type": "number"
+                                              },
+                                              "id": {
+                                                  "type": "number"
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                        }
+                      }
+                    },
+                    "405": {
+                      "description": "No se pudo obtener el consumo"
+                    }
+                  }
+            }
+        },
+        "/casas/{direccion}/editar consumo": {
+            "patch": {
+                "tags": [
+                    "metodo personalisado"
+                  ],
+                "summary": "actualiza el consumo",
+                "description": "actualiza el consumo diario de una casa determinada",
+                "parameters": [
+                    {
+                        "name" : "direccion",
+                        "in" : "path",
+                        "schema" : {
+                            "type" : "number"
+                        }
+                    }
+                  ],
+                  "requestBody": {
+                    "description": "editar consumo",
+                    "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "array",
+                              "items": {
+                                  "type": "object",
+                                  "properties": {
+                                      "consumo diario": {
+                                          "type": "number"
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                    },
+                    "required": true
+                  },
+                  "responses": {
+                    "200": {
+                      "description": "consumo editado exitosamente",
+                      "content": {
+                        "application/json": {
+                          "schema": {
+                              "type": "array",
+                              "items": {
+                                  "type": "object",
+                                  "properties": {
+                                      "direccion": {
+                                          "type": "number"
+                                      },  
+                                      "consumo diario": {
+                                          "type": "number"
+                                      },
+                                      "objetos": {
+                                          "type" : "object",
+                                          "properties" :{
+                                              "nombre": {
+                                                  "type": "string"
+                                              },  
+                                              "consumo": {
+                                                  "type": "number"
+                                              },
+                                              "id": {
+                                                  "type": "number"
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                        }
+                      }
+                    },
+                    "405": {
+                      "description": "No se pudo editar el consumo"
+                    }
+                  }
+            }
+        },
+        "/casas/{direccion}/editar direccion": {
+            "patch": {
+                "tags": [
+                    "metodo personalisado"
+                  ],
+                "summary": "actualiza la direccion",
+                "description": "actualiza la direccion de una casa determinada",
+                "parameters": [
+                    {
+                        "name" : "direccion",
+                        "in" : "path",
+                        "schema" : {
+                            "type" : "number"
+                        }
+                    }
+                  ],
+                  "requestBody": {
+                    "description": "editar consumo",
+                    "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "array",
+                              "items": {
+                                  "type": "object",
+                                  "properties": {
+                                      "direccion": {
+                                          "type": "number"
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                    },
+                    "required": true
+                  },
+                  "responses": {
+                    "200": {
+                      "description": "Caso creado exitosamente",
+                      "content": {
+                        "application/json": {
+                          "schema": {
+                              "type": "array",
+                              "items": {
+                                  "type": "object",
+                                  "properties": {
+                                      "direccion": {
+                                          "type": "number"
+                                      },  
+                                      "consumo diario": {
+                                          "type": "number"
+                                      },
+                                      "objetos": {
+                                          "type" : "object",
+                                          "properties" :{
+                                              "nombre": {
+                                                  "type": "string"
+                                              },  
+                                              "consumo": {
+                                                  "type": "number"
+                                              },
+                                              "id": {
+                                                  "type": "number"
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                        }
+                      }
+                    },
+                    "405": {
+                      "description": "No se ha podido crear la casa"
+                    }
+                  }
+            }
+        },
         "/objetos": {
             "get": {
+                "tags": [
+                    "objetos"
+                  ],
                 "summary": "Obtener una lista de todas los objetos",
                 "description": "Obtiene una lista de objetos con sus respectivos datos",
                 "responses": {
@@ -306,10 +648,10 @@
                                                 "type": "string"
                                             },  
                                             "consumo": {
-                                                "type": "Interger"
+                                                "type": "number"
                                             },
                                             "id": {
-                                                "type": "Interger"
+                                                "type": "number"
                                             }
 
                                         }
@@ -321,41 +663,55 @@
                 }
             },
             "post" :{
+                "tags": [
+                    "objetos"
+                  ],
                 "summary": "agrega un objeto",
                 "description": "agrega un objeto a la lista de todos los objetos",
-                "responses": {
-                    "200": {
-                        "description": "Operación exitosa",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "nombre": {
-                                                "type": "string"
-                                            },  
-                                            "consumo": {
-                                                "type": "Interger"
-                                            },
-                                            "id": {
-                                                "type": "Interger"
-                                            }
-
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                "requestBody": {
+                    "description": "editar consumo",
+                    "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "array",
+                              "items": {
+                                  "type": "object",
+                                  "properties": {
+                                      "id": {
+                                          "type": "number"
+                                      },
+                                      "consumo":{
+                                        "type" :"number"
+                                      },
+                                      "nombre" : {
+                                        "type":"string"
+                                      }
+                                  },
+                                  "required": ["ID","consumo", "nombre"]
+                              }
+                          }
+                      }
+                    },
+                    "required": true
+                  }
             }
         },
-        "/objetos/:id": {
+        "/objetos/{id}": {
             "get": {
+                "tags": [
+                    "objetos"
+                  ],
                 "summary": "Obtiene un objeto",
                 "description": "Obtiene un objeto de la lista de objetos ",
+                "parameters": [
+                    {
+                        "name" : "id",
+                        "in" : "path",
+                        "schema" : {
+                            "type" : "number"
+                        }
+                    }
+                  ],
                 "responses": {
                     "200": {
                         "description": "Operación exitosa",
@@ -370,10 +726,10 @@
                                                 "type": "string"
                                             },  
                                             "consumo": {
-                                                "type": "Interger"
+                                                "type": "number"
                                             },
                                             "id": {
-                                                "type": "Interger"
+                                                "type": "number"
                                             }
 
                                         }
@@ -385,8 +741,20 @@
                 }
             },
             "delete" :{
+                "tags": [
+                    "objetos"
+                  ],
                 "summary": "borra un objeto",
                 "description": "borra un objeto de la lista de objetos",
+                "parameters": [
+                    {
+                        "name" : "id",
+                        "in" : "path",
+                        "schema" : {
+                            "type" : "number"
+                        }
+                    }
+                  ],
                 "responses": {
                     "200": {
                         "description": "Operación exitosa",
@@ -401,10 +769,10 @@
                                                 "type": "string"
                                             },  
                                             "consumo": {
-                                                "type": "Interger"
+                                                "type": "number"
                                             },
                                             "id": {
-                                                "type": "Interger"
+                                                "type": "number"
                                             }
 
                                         }
@@ -416,8 +784,42 @@
                 }
             },
             "put" :{
+                "tags": [
+                    "objetos"
+                  ],
                 "summary": "actualiza un objeto",
                 "description": "cambia los datos de un objeto",
+                "parameters": [
+                    {
+                        "name" : "id",
+                        "in" : "path",
+                        "schema" : {
+                            "type" : "number"
+                        }
+                    }
+                  ],
+                  "requestBody": {
+                    "description": "actualiza los datos de un objeto",
+                    "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "array",
+                              "items": {
+                                  "type": "object",
+                                  "properties": { 
+                                    "consumo": {
+                                        "type": "number"
+                                    },
+                                    "nombre": {
+                                        "type": "string"
+                                    }
+                                  }
+                              },
+                              "required": ["consumo", "nombre"]
+                          }
+                      }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Operación exitosa",
@@ -432,10 +834,10 @@
                                                 "type": "string"
                                             },  
                                             "consumo": {
-                                                "type": "Interger"
+                                                "type": "number"
                                             },
                                             "id": {
-                                                "type": "Interger"
+                                                "type": "number"
                                             }
 
                                         }
@@ -447,8 +849,41 @@
                 }
             },
             "patch" :{
+                "tags": [
+                    "objetos"
+                  ],
                 "summary": "actualiza los datos de un objeto",
                 "description": "cambia todos los datos de un objeto",
+                "parameters": [
+                    {
+                        "name" : "id",
+                        "in" : "path",
+                        "schema" : {
+                            "type" : "number"
+                        }
+                    }
+                  ],
+                  "requestBody": {
+                    "description": "actualiza los datos de un objeto",
+                    "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "array",
+                              "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },  
+                                    "consumo": {
+                                        "type": "number"
+                                    }
+                                  }
+                              }
+                          }
+                      }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Operación exitosa",
@@ -463,10 +898,10 @@
                                                 "type": "string"
                                             },  
                                             "consumo": {
-                                                "type": "Interger"
+                                                "type": "number"
                                             },
                                             "id": {
-                                                "type": "Interger"
+                                                "type": "number"
                                             }
 
                                         }
