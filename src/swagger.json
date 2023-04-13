@@ -31,7 +31,7 @@
                                             "direccion": {
                                                 "type": "number"
                                             },  
-                                            "consumo diario": {
+                                            "consumo_diario": {
                                                 "type": "number"
                                             },
                                             "objetos": {
@@ -103,7 +103,7 @@
                                     "direccion": {
                                         "type": "number"
                                     },  
-                                    "consumo diario": {
+                                    "consumo_diario": {
                                         "type": "number"
                                     },
                                     "objetos": {
@@ -161,7 +161,7 @@
                                       "direccion": {
                                           "type": "number"
                                       },  
-                                      "consumo diario": {
+                                      "consumo_diario": {
                                           "type": "number"
                                       },
                                       "objetos": {
@@ -217,7 +217,7 @@
                                       "direccion": {
                                           "type": "number"
                                       },  
-                                      "consumo diario": {
+                                      "consumo_diario": {
                                           "type": "number"
                                       },
                                       "objetos": {
@@ -268,7 +268,7 @@
                               "items": {
                                   "type": "object",
                                   "properties": {  
-                                      "consumo diario": {
+                                      "consumo_diario": {
                                           "type": "number"
                                       }
                                   }
@@ -291,7 +291,7 @@
                                       "direccion": {
                                           "type": "number"
                                       },  
-                                      "consumo diario": {
+                                      "consumo_diario": {
                                           "type": "number"
                                       },
                                       "objetos": {
@@ -346,7 +346,7 @@
                                       "direccion": {
                                           "type": "number"
                                       },  
-                                      "consumo diario": {
+                                      "consumo_diario": {
                                           "type": "number"
                                       },
                                       "objetos": {
@@ -386,7 +386,7 @@
                                     "direccion": {
                                         "type": "number"
                                     },  
-                                    "consumo diario": {
+                                    "consumo_diario": {
                                         "type": "number"
                                     },
                                     "objetos": {
@@ -418,7 +418,7 @@
         "/casas/{direccion}/mostrarConsumo": {
             "get": {
                 "tags": [
-                    "metodo personalisado"
+                    "metodo personalizado"
                   ],
                 "summary": "Obtener el consumo",
                 "description": "Obtiene el consumo diario de una casa determinada",
@@ -444,7 +444,7 @@
                                       "direccion": {
                                           "type": "number"
                                       },  
-                                      "consumo diario": {
+                                      "consumo_diario": {
                                           "type": "number"
                                       },
                                       "objetos": {
@@ -476,7 +476,7 @@
         "/casas/{direccion}/editar consumo": {
             "patch": {
                 "tags": [
-                    "metodo personalisado"
+                    "metodo personalizado"
                   ],
                 "summary": "actualiza el consumo",
                 "description": "actualiza el consumo diario de una casa determinada",
@@ -498,7 +498,7 @@
                               "items": {
                                   "type": "object",
                                   "properties": {
-                                      "consumo diario": {
+                                      "consumo_diario": {
                                           "type": "number"
                                       }
                                   }
@@ -521,7 +521,7 @@
                                       "direccion": {
                                           "type": "number"
                                       },  
-                                      "consumo diario": {
+                                      "consumo_diario": {
                                           "type": "number"
                                       },
                                       "objetos": {
@@ -553,7 +553,7 @@
         "/casas/{direccion}/editar direccion": {
             "patch": {
                 "tags": [
-                    "metodo personalisado"
+                    "metodo personalizado"
                   ],
                 "summary": "actualiza la direccion",
                 "description": "actualiza la direccion de una casa determinada",
@@ -598,7 +598,7 @@
                                       "direccion": {
                                           "type": "number"
                                       },  
-                                      "consumo diario": {
+                                      "consumo_diario": {
                                           "type": "number"
                                       },
                                       "objetos": {
