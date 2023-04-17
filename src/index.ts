@@ -6,11 +6,21 @@ import swaggerUI from 'swagger-ui-express'
 import * as swaggerDocument from './swagger';
 import { routerObjeto } from './routes/routesObjetos';
 import { routerCasa } from './routes/routesCasa';
+import mongoose from 'mongoose';
+import db from './db';
+const dbUrl = 'mongodb://localhost:27017/TP-API-DIAZ-TOLEDO';
+
 const app: express.Application = express();
 const port = 5000;
 app.listen(port, () => {console.log("La Api esta funcionando")})
 let o1:Objetos = new Objetos("tv",1234,1);
 let c1:Casa = new Casa(1, 123123);
+mongoose.connect(dbUrl, ).then(() => {
+  console.log('Conexión exitosa con MongoDB');
+}).catch((error) => {
+  console.log('Error al conectar con MongoDB:', error);
+});
+
 
 export let casas:Array<Casa> = new Array<Casa>;
 export let objetos:Array<Objetos> = new Array<Objetos>;
