@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+
 export class Objetos {
     nombre: string; 
     id: number;
@@ -9,3 +11,18 @@ export class Objetos {
     }
 
 }
+
+export interface ObjetosType extends mongoose.Document {
+  id: Number;
+  consumo: Number;
+  nombre: String;
+
+}
+
+const objetosSchema = new mongoose.Schema({
+  nombre: { type: String, required: true },
+  id: { type: Number, required: true },
+  consumo: { type: String, required: true },
+});
+
+export default mongoose.model<ObjetosType>('Objetos', objetosSchema);
