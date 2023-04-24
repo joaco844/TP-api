@@ -6,12 +6,13 @@ import swaggerUI from 'swagger-ui-express'
 import * as swaggerDocument from './swagger';
 import { routerObjeto } from './routes/routesObjetos';
 import { routerCasa } from './routes/routesCasa';
+import { routerMetodos } from './routes/routesCasa';
 import mongoose, { ConnectOptions } from "mongoose";
 import db from './db';
 const dbUrl = 'mongodb://localhost:27017/TP-API-DIAZ-TOLEDO';
 
 const app: express.Application = express();
-const port = 5002;
+const port = 5003;
 app.listen(port, () => {console.log("La Api esta funcionando")})
 //let o1:Objetos = new Objetos("tv",1234,1);
 //let c1:Casa = new Casa(1, 123123);
@@ -60,8 +61,8 @@ app.get('/', (_req , _res) => _res.send('Bienvenido a mi API REST!'));
 
   app.patch("/casas/:direccion", routerCasa)
 
-  app.get("/casas/:direccion/mostrarConsumo", routerCasa)
+  app.get("/casas/:direccion/mostrarConsumo", routerMetodos)
 
-  app.patch("/casas/:direccion/editar consumo", routerCasa)
+  app.patch("/casas/sumar_consumos/:direccion/:direccion1", routerMetodos)
 
-  app.patch("/casas/:direccion/editar direccion", routerCasa)
+  app.patch("/casas/editar_direccion/:direccion", routerMetodos)
