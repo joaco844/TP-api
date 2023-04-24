@@ -5,6 +5,7 @@ import  Casa, { CasaType } from '../Casa';
 import mongoose, { ConnectOptions, Error } from "mongoose";
 
 export const routerCasa = Router();
+export const routerMetodos = Router();
 
 routerCasa.get("/casas", async (_req,_res) => {
   const casas = await Casa.find().populate('objetos');
@@ -40,7 +41,7 @@ routerCasa.post("/casas", async (_req,_res) => {
 
   //------------Metodos personalizados------------------------------------------------
 
-  routerCasa.get("/casas/:direccion/mostrarConsumo", (_req,_res) => {
+  routerMetodos.get("/casas/:direccion/mostrarConsumo", (_req,_res) => {
     Casa.find().then((casas)=>{
       casas.forEach(element => {
           _res.send(String(element.consumo_diario));
@@ -49,13 +50,24 @@ routerCasa.post("/casas", async (_req,_res) => {
   })
 
 
-  routerCasa.patch("/casas/:direccion/editar_consumo", async (_req, _res) => {
-    const casa = await Casa.findOneAndUpdate({"direccion": _req.params.direccion}, _req.body);
-    _res.send(casa)
-})
+  routerMetodos.get("/casas/sumar_consumos/:direccion/:direccion1", async (_req, _res) => {
+    let suma: Number;
+    Casa.find().then((casas1)=>{
+      casas1.forEach(element1 => {
+        Casa.find().then((casas)=>{
+          casas.forEach(element => {
+            suma = element.consumo_diario.valueOf() + element1.consumo_diario.valueOf();
+            _res.status(200).send(suma)
+      });
+          })
+        });
+          });
+          
+    });
+      
 
-    routerCasa.patch("/casas/:direccion/editar_direccion", async(_req, _res) => {
-        const direccion = _req.params.direccion;
-        const casa = await Casa.findByIdAndUpdate(direccion, _req.body.direccion, { new: true });
-        _res.send(casa); 
+
+    routerMetodos.patch("/casas/editar_direccion/:direccion", async(_req, _res) => {
+         const casa = await Casa.findOneAndUpdate({"direccion": _req.params.direccion}, _req.body);
+    _res.send(casa)
       })
