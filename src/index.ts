@@ -1,19 +1,21 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { ObjetoDocument } from './Objetos';
-import { CasaType } from './Casa';
+import dotenv from 'dotenv';
+dotenv.config();
 import swaggerUI from 'swagger-ui-express'
 import * as swaggerDocument from './swagger';
 import { routerObjeto } from './routes/routesObjetos';
 import { routerCasa } from './routes/routesCasa';
 import { routerMetodos } from './routes/routesCasa';
+import { TokenValidation } from "./libs/validateToken";
+import router from './auth';
 import mongoose, { ConnectOptions } from "mongoose";
-import db from './db';
 const dbUrl = 'mongodb://localhost:27017/TP-API-DIAZ-TOLEDO';
 
 const app: express.Application = express();
-const port = 5003;
-app.listen(port, () => {console.log("La Api esta funcionando")})
+const port = 5100;
+app.listen(port, ( ) => {console.log("La Api esta funcionando")})
+
 //let o1:Objetos = new Objetos("tv",1234,1);
 //let c1:Casa = new Casa(1, 123123);
 
@@ -33,36 +35,41 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use(bodyParser.json())
 app.get('/', (_req , _res) => _res.send('Bienvenido a mi API REST!'));
 
+
+  //-------------------------------------------------
+
+  app.use(router);
+
   //-------------------------------------------------
   
-  app.get("/objetos", routerObjeto)
+  app.get("/objetos", TokenValidation,routerObjeto)
  
-  app.get("/objetos/:id", routerObjeto)
+  app.get("/objetos/:id", TokenValidation,routerObjeto)
   
-  app.post("/objetos", routerObjeto)
+  app.post("/objetos", TokenValidation,routerObjeto)
   
-  app.delete("/objetos/:id", routerObjeto)
+  app.delete("/objetos/:id", TokenValidation,routerObjeto)
 
-  app.put("/objetos/:id", routerObjeto)
+  app.put("/objetos/:id", TokenValidation,routerObjeto)
 
-  app.patch("/objetos/:id/", routerObjeto)
+  app.patch("/objetos/:id/", TokenValidation,routerObjeto)
 
   //-------------------------------------------------
 
-  app.get("/casas", routerCasa)
+  app.get("/casas",TokenValidation, routerCasa)
 
-  app.get("/casas/:direccion", routerCasa)
+  app.get("/casas/:direccion", TokenValidation,routerCasa)
   
-  app.post("/casas", routerCasa)
+  app.post("/casas", TokenValidation,routerCasa)
   
-  app.delete("/casas/:direccion", routerCasa)
+  app.delete("/casas/:direccion",TokenValidation, routerCasa)
 
-  app.put("/casas/:direccion", routerCasa)
+  app.put("/casas/:direccion", TokenValidation,routerCasa)
 
-  app.patch("/casas/:direccion", routerCasa)
+  app.patch("/casas/:direccion",TokenValidation, routerCasa)
 
-  app.get("/casas/:direccion/mostrarConsumo", routerMetodos)
+  app.get("/casas/:direccion/mostrarConsumo",TokenValidation, routerMetodos)
 
-  app.patch("/casas/sumar_consumos/:direccion/:direccion1", routerMetodos)
+  app.patch("/casas/sumar_consumos/:direccion/:direccion1",TokenValidation, routerMetodos)
 
-  app.patch("/casas/editar_direccion/:direccion", routerMetodos)
+  app.patch("/casas/editar_direccion/:direccion", TokenValidation,routerMetodos)
